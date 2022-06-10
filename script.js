@@ -52,6 +52,119 @@ function writePassword() {
 
   passwordText.value = password;
 }
+// Password generation section
+function generatePassword() {
+  const constraints = getPassConstraint();
+  const charOptions = [];
+  const passwordArray = [];
+  // If constraints.lowCase is true then Add to charOptions
+  if (constraints.lowCase) {
+    //  Lower case option array
+    const lowArr = [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+    ];
+    // Add lower case characters to charOptions
+    charOptions.push(...lowArr);
+  }
+  if (constraints.upCase) {
+    const upArray = [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+    ];
+    // Add UPPER case characters to charOptions
+    charOptions.push(...upArray);
+  }
+  if (constraints.numeric) {
+    const numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    // Add number characters to charOptions
+    charOptions.push(...numArray);
+  }
+  if (constraints.specialChar) {
+    const specialArray = [
+      "!",
+      "@",
+      "#",
+      "$",
+      "%",
+      "^",
+      "&",
+      "*",
+      "(",
+      ")",
+      "+",
+      "=",
+      "/",
+      "?",
+      ",",
+      ".",
+      "<",
+      ">",
+      "~",
+    ];
+    // Add special characters to charOptions
+    charOptions.push(...specialArray);
+  }
+
+  for (i = 0; i < constraints.passLength; i++) {
+    // Randomly select characters from charOptions
+    const ranChar = charOptions[Math.floor(Math.random() * charOptions.length)];
+    //  Push into passwordArray[]
+    passwordArray.push(ranChar);
+  }
+  // Turn password array into one string
+  const password = passwordArray.join("");
+
+  return password;
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
